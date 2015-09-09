@@ -10,3 +10,6 @@ from app.views import main
 
 # register blueprints
 app.register_blueprint(main.mod)
+
+# import helper utilities
+from app import helpers
