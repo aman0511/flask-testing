@@ -1,16 +1,9 @@
-from flask import Flask, url_for
-import os
+from flask import Flask
 
 app = Flask(__name__)
 
-# Determines the destination of the build. Only usefull if you're using Frozen-Flask
-app.config['FREEZER_DESTINATION'] = os.path.dirname(os.path.abspath(__file__))+'/../build'
-
-# Function to easily find your assets
-# In your template use <link rel=stylesheet href="{{ static('filename') }}">
-app.jinja_env.globals['static'] = (
-    lambda filename: url_for('static', filename = filename)
-)
+# config set up
+app.config.from_object('config')
 
 # import views
 from app.views import main
