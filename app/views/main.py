@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
-mod = Blueprint('main', __name__, url_prefix="/",
+mod = Blueprint('main', __name__, url_prefix="",
                 template_folder="templates")
 
 
@@ -23,5 +23,14 @@ def teardown_request(response):
 
 @mod.route("/", methods=['GET'])
 def index():
+    print request.args.get('email')
     print "Index is called"
-    return render_template('index.html')
+    context = {
+        'app': request.args.get('email')
+    }
+    return render_template('index.html', **context)
+
+
+@mod.route('/test', methods=['GET'])
+def test():
+    return render_template('test.html')
